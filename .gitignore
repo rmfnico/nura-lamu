@@ -1,0 +1,14 @@
+# Build outputs
+/out/
+/dist/
+*.o
+*.ko
+*.mod
+*.mod.c
+*.cmd
+
+# Host/editor files
+.DS_Store
+*.swp
+*.swo
+*~
