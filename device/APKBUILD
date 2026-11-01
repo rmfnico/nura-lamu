@@ -1,0 +1,34 @@
+# Reference: <https://postmarketos.org/devicepkg>
+maintainer="rmfnico <263658391+rmfnico@users.noreply.github.com>"
+pkgname=device-motorola-lamu
+pkgver=1
+pkgrel=0
+pkgdesc="Motorola Moto G15 Power"
+url="https://github.com/rmfnico/nura-lamu"
+arch="aarch64"
+license="MIT"
+depends="
+	android-tools-mkbootimg
+	linux-motorola-lamu
+	postmarketos-base
+	postmarketos-base-downstream
+	"
+makedepends="devicepkg-dev"
+source="
+	deviceinfo
+	modules-initfs
+	"
+options="!archcheck !check"
+
+build() {
+	devicepkg_build $startdir $pkgname
+}
+
+package() {
+	devicepkg_package $startdir $pkgname
+}
+
+sha512sums="
+950ba2a3ffe63fe2c9803e5634ff35b7adde6d62ac9f5a5ac302dc0de24681e355cd9b181cc63357376943727298cb8e68fcf2cff638f7161e2377987b323fa9  deviceinfo
+b0ea2f8bf967f9081a7017aca6f7407bc9df67797e419e4ab4535ba18930937cb35b84e68345983f1be11f289536df5c3efa8e950122e7f3cb4328b810c85377  modules-initfs
+"

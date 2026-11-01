@@ -1,0 +1,2 @@
+# MediaTek MMC host controller required during early boot.
+mtk_mmc
