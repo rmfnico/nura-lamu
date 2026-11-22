@@ -45,10 +45,14 @@ Overlays:
 - `lineage.config`
 - `uniloader_overlay.config`
 
-`uniloader_overlay.config` enables built-in SimpleDRM and framebuffer
-console support for early output from a bootloader-initialized
-simple framebuffer. It is inert when no `simple-framebuffer` node is
-present in the device tree.
+`uniloader_overlay.config` enables built-in SimpleDRM, fbdev emulation,
+VT and the framebuffer console for early output from a bootloader-
+initialized simple framebuffer. The embedded command line uses
+`console=tty0` instead of `console=ttynull`, so kernel messages reach
+that console. BTF debug data and KASAN are disabled: together these cut
+about 6 MB from the uncompressed image, which had exceeded the MT6768
+LK load window. The overlay is
+inert when no `simple-framebuffer` node is present in the device tree.
 
 ## G05 / uniLoader test artifacts
 
@@ -56,6 +60,10 @@ present in the device tree.
 uniLoader sets up on the Moto G05 (XT2523-4, `lamul`). The values are
 taken from `board/motorola/board-lamul.c` in the uniLoader tree.
 
+The downstream `mediatek-drm` module carries a stale `mtk_drm_fbdev.c`
+that does not build with `CONFIG_DRM_FBDEV_EMULATION=y`. Apply
+`kernel/patches/disable-mtk-drm-fbdev.patch` in the kernel workspace
+before building; it leaves generic fbdev emulation for SimpleDRM intact.
 After the normal kernel build, run:
 
 ```sh
@@ -64,7 +72,12 @@ After the normal kernel build, run:
 
 This produces `lamul-uniloader.dtbo` and a pre-merged
 `mt6768-lamul-uniloader.dtb` (base DTB + lamu overlay + framebuffer
-overlay). They are staged in
+overlay). The framebuffer fragment declares `ranges` so its `reg` is
+translated correctly. The overlay also reserves the ramoops region
+used by LK at `0x4d010000`, size `0xe0000`, with `0x40000` record and
+console areas and 16-byte ECC. Pstore, console pstore and RAM pstore
+are already enabled in the kernel config, so logs survive a failed
+boot. They are staged in
 `out/dist/kernel_device_modules-6.6/mgk_64_k66.user/` and copied to
 `out/mgk_64_k66/dist/` when that directory exists. The pre-merged DTB
 is for the uniLoader test only; it is not a Moto G15 Power device tree.
@@ -106,5 +119,7 @@ The `linux-motorola-lamu` postmarketOS kernel package is not implemented yet.
 - Boot and hardware functionality not yet tested on lamu.
 - G05 boot remains untested; no successful Linux boot has been
   confirmed. This remains an experimental cross-device test.
+- The G05 console, framebuffer translation, ramoops and image size
+  fixes are built into this iteration but have not been retested yet.
 - The MT6768 DTB already carries a valid `/memory` node at
   `0x40000000`; no RAM values are guessed or injected for the G05.

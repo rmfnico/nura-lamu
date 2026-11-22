@@ -1,0 +1,11 @@
+diff --git a/kernel_device_modules-6.6/drivers/gpu/drm/mediatek/mediatek_v2/Makefile b/kernel_device_modules-6.6/drivers/gpu/drm/mediatek/mediatek_v2/Makefile
+--- a/kernel_device_modules-6.6/drivers/gpu/drm/mediatek/mediatek_v2/Makefile
++++ b/kernel_device_modules-6.6/drivers/gpu/drm/mediatek/mediatek_v2/Makefile
+@@ -150,7 +150,5 @@ endif
+ obj-$(CONFIG_DRM_MEDIATEK_HDMI) += mediatek-drm-hdmi.o
+ 
+-mediatek-drm-$(CONFIG_DRM_FBDEV_EMULATION) += mtk_drm_fbdev.o
+-
+ obj-$(CONFIG_DEVICE_MODULES_DRM_MEDIATEK) += mediatek-drm.o
+ obj-$(CONFIG_DEVICE_MODULES_DRM_MEDIATEK) += mtk_sync.o
+ 

@@ -5,6 +5,7 @@
 &chosen {
 	#address-cells = <2>;
 	#size-cells = <2>;
+	ranges;
 
 	framebuffer@78200000 {
 		compatible = "simple-framebuffer";
@@ -13,5 +14,15 @@
 		height = <1604>;
 		stride = <2944>;
 		format = "a8r8g8b8";
+	};
+};
+
+&reserved_memory {
+	ramoops@4d010000 {
+		compatible = "ramoops";
+		reg = <0x0 0x4d010000 0x0 0xe0000>;
+		record-size = <0x40000>;
+		console-size = <0x40000>;
+		ecc-size = <16>;
 	};
 };
