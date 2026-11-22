@@ -1,4 +1,4 @@
-# Moto G15 Power (lamu) — postmarketOS
+# Nura — Moto G15 Power
 
 port for the Motorola Moto G15 Power (XT2521-5).
 note: this port hasn't been tested to boot yet.
@@ -18,7 +18,9 @@ Files
 The device package depends on `linux-motorola-lamu`, which is not
 included in this repository yet.
 
-## Side device
+## Secondary device: Motorola Moto G05 (lamul)
+
+G05 is a side device, boot untested, shares firmware where verified.
 
 - Moto G05 (XT2523-4, `lamul`) is a side device for uniLoader testing.
 - The lamu family shares firmware; the same kernel build is intended
