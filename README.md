@@ -18,6 +18,13 @@ Files
 The device package depends on `linux-motorola-lamu`, which is not
 included in this repository yet.
 
+## Side device
+
+- Moto G05 (XT2523-4, `lamul`) is a side device for uniLoader testing.
+- The lamu family shares firmware; the same kernel build is intended
+  to work on both devices.
+- G05 boot is untested.
+
 Kernel sources
 
 Sources are kept upstream, not vendored here.
@@ -34,8 +41,31 @@ Overlays:
 - `mt6768_overlay.config`
 - `lamu_overlay.config`
 - `lineage.config`
+- `uniloader_overlay.config`
 
+`uniloader_overlay.config` enables built-in SimpleDRM and framebuffer
+console support for early output from a bootloader-initialized
+simple framebuffer. It is inert when no `simple-framebuffer` node is
+present in the device tree.
 
+## G05 / uniLoader test artifacts
+
+`kernel/dts/lamul-uniloader.dtso` describes the framebuffer that
+uniLoader sets up on the Moto G05 (XT2523-4, `lamul`). The values are
+taken from `board/motorola/board-lamul.c` in the uniLoader tree.
+
+After the normal kernel build, run:
+
+```sh
+./kernel/build-uniloader-artifacts.sh ~/Downloads/lamu-kernel-workspace
+```
+
+This produces `lamul-uniloader.dtbo` and a pre-merged
+`mt6768-lamul-uniloader.dtb` (base DTB + lamu overlay + framebuffer
+overlay). They are staged in
+`out/dist/kernel_device_modules-6.6/mgk_64_k66.user/` and copied to
+`out/mgk_64_k66/dist/` when that directory exists. The pre-merged DTB
+is for the uniLoader test only; it is not a Moto G15 Power device tree.
 
 ## Kernel checkout
 
@@ -71,4 +101,8 @@ The `linux-motorola-lamu` postmarketOS kernel package is not implemented yet.
 - Kernel source configuration prepared.
 - Kernel build completed.
 - Device package added.
-- Boot and hardware functionality not yet tested.
+- Boot and hardware functionality not yet tested on lamu.
+- G05 boot remains untested; no successful Linux boot has been
+  confirmed. This remains an experimental cross-device test.
+- The MT6768 DTB already carries a valid `/memory` node at
+  `0x40000000`; no RAM values are guessed or injected for the G05.

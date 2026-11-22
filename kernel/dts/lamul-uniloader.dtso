@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: GPL-2.0
+/dts-v1/;
+/plugin/;
+
+&chosen {
+	#address-cells = <2>;
+	#size-cells = <2>;
+
+	framebuffer@78200000 {
+		compatible = "simple-framebuffer";
+		reg = <0x0 0x78200000 0x0 0x480e00>;
+		width = <736>;
+		height = <1604>;
+		stride = <2944>;
+		format = "a8r8g8b8";
+	};
+};
