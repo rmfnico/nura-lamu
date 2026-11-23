@@ -25,7 +25,7 @@ G05 is a side device, boot untested, shares firmware where verified.
 - Moto G05 (XT2523-4, `lamul`) is a side device for uniLoader testing.
 - The lamu family shares firmware; the same kernel build is intended
   to work on both devices.
-- G05 boot is untested.
+- G05 boot fails!! will fix soon.
 
 Kernel sources
 
