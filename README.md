@@ -1,7 +1,7 @@
 # Nura — Moto G15 Power
 
-port for the Motorola Moto G15 Power (XT2521-5).
-note: this port hasn't been tested to boot yet.
+port for the Motorola Moto G15 Power (XT2521-5) and Motorola Moto G05 (XT2523-4).
+note: this port hasn't been tested to boot yet. Treat releases as test points; nothing is guaranteed to boot.
 
 Device
 
@@ -25,7 +25,7 @@ G05 is a side device, boot untested, shares firmware where verified.
 - Moto G05 (XT2523-4, `lamul`) is a side device for uniLoader testing.
 - The lamu family shares firmware; the same kernel build is intended
   to work on both devices.
-- G05 boot is untested.
+- G05 boot untested.
 
 Kernel sources
 
