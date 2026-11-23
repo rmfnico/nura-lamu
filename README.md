@@ -1,6 +1,6 @@
 # Nura — Moto G15 Power
 
-port for the Motorola Moto G15 Power (XT2521-5) and Motorola Moto G05.
+port for the Motorola Moto G15 Power (XT2521-5) and Motorola Moto G05 (XT2523-4).
 note: this port hasn't been tested to boot yet. Treat releases as test points; nothing is guaranteed to boot.
 
 Device
